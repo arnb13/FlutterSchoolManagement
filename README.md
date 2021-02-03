@@ -17,4 +17,6 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Backend
 
-Backend developed using Django REST API and PostgreSQL
+Backend developed using Django REST API and PostgreSQL. 
+
+- [Repo: Flutter School Management Backend](https://github.com/arnb13/flutter-school-management-backend)
