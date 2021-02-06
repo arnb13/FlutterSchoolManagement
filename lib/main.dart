@@ -48,7 +48,8 @@ class MyHomeStateful extends StatefulWidget {
 }
 
 class _MyHomeStatefulState extends State<MyHomeStateful> {
-  GlobalKey<StudentState> _globalKey = GlobalKey();
+  GlobalKey<StudentState> _globalKeyStudent = GlobalKey();
+  GlobalKey<TeacherState> _globalKeyTeacher = GlobalKey();
 
   int pos = 0;
   bool fab = false;
@@ -82,9 +83,9 @@ class _MyHomeStatefulState extends State<MyHomeStateful> {
     if (pos == 0) {
       return Dashboard();
     } else if (pos == 1) {
-      return Student(key: _globalKey);
+      return Student(key: _globalKeyStudent);
     } else if (pos == 2) {
-      return Teacher();
+      return Teacher(key: _globalKeyTeacher);
     } else if (pos == 3) {
       return Section();
     }
@@ -102,7 +103,7 @@ class _MyHomeStatefulState extends State<MyHomeStateful> {
           onPressed: () async {
             await Navigator.pushNamed(context, '/addStudent');
             // call it to refresh your data
-            _globalKey.currentState.refreshData();
+            _globalKeyStudent.currentState.refreshData();
           });
     } else if (pos == 2) {
       return FloatingActionButton(
@@ -113,7 +114,7 @@ class _MyHomeStatefulState extends State<MyHomeStateful> {
           ),
           onPressed: () async {
             await Navigator.pushNamed(context, '/addTeacher');
-            _globalKey.currentState.refreshData();
+            _globalKeyTeacher.currentState.refreshData();
           });
     } else if (pos == 3) {
       return FloatingActionButton(
