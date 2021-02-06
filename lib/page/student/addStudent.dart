@@ -7,10 +7,10 @@ import 'package:school_flutter/page/student/studentData.dart';
 
 class AddStudent extends StatefulWidget {
   @override
-  _AddStudent createState() => _AddStudent();
+  AddStudentState createState() => AddStudentState();
 }
 
-class _AddStudent extends State<AddStudent> {
+class AddStudentState extends State<AddStudent> {
   @override
   Widget build(BuildContext context) {
     TextEditingController firstNameCont = TextEditingController();
@@ -115,65 +115,8 @@ class _AddStudent extends State<AddStudent> {
                         borderRadius: BorderRadius.circular(50)),
                     color: Colors.teal,
                     onPressed: () {
-                      String firstName = firstNameCont.text;
-                      String lastName = lastNameCont.text;
-                      String roll = rollCont.text;
-                      String email = emailCont.text;
-                      String phone = phoneCont.text;
-
-                      if (firstName.isNotEmpty &&
-                          lastName.isNotEmpty &&
-                          roll.isNotEmpty &&
-                          email.isNotEmpty &&
-                          phone.isNotEmpty) {
-                        studentData data = studentData(
-                            id: 0,
-                            firstName: firstName,
-                            lastName: lastName,
-                            roll: roll,
-                            email: email,
-                            phone: phone);
-                        Future success = studentData().addStudentApi(data);
-
-                        success.then((value) {
-                          Response response = value;
-                          print('XXXXXXXXXXXXXXXXXXX');
-                          print(response.statusCode);
-                          print(response.body);
-                          if (response.statusCode == 200) {
-                            Fluttertoast.showToast(
-                              msg: 'New student added successfully',
-                              backgroundColor: Colors.green[100],
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              textColor: Colors.black,
-                            );
-
-                            Navigator.pop(context);
-
-                            Navigator.pushNamed(context, '/studentProfile',
-                                arguments: {
-                                  'roll': roll,
-                                });
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: jsonDecode(response.body)['status'],
-                              backgroundColor: Colors.red[100],
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              textColor: Colors.black,
-                            );
-                          }
-                        });
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: 'Please fill up all fields',
-                          backgroundColor: Colors.red[100],
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          textColor: Colors.black,
-                        );
-                      }
+                      submit(firstNameCont, lastNameCont, rollCont, emailCont,
+                          phoneCont, context);
                     }),
               )
             ],
@@ -181,5 +124,72 @@ class _AddStudent extends State<AddStudent> {
         ),
       ),
     );
+  }
+
+  /*
+    Submit student data
+   */
+  void submit(
+      TextEditingController firstNameCont,
+      TextEditingController lastNameCont,
+      TextEditingController rollCont,
+      TextEditingController emailCont,
+      TextEditingController phoneCont,
+      BuildContext context) {
+    String firstName = firstNameCont.text;
+    String lastName = lastNameCont.text;
+    String roll = rollCont.text;
+    String email = emailCont.text;
+    String phone = phoneCont.text;
+
+    if (firstName.isNotEmpty &&
+        lastName.isNotEmpty &&
+        roll.isNotEmpty &&
+        email.isNotEmpty &&
+        phone.isNotEmpty) {
+      studentData data = studentData(
+          id: 0,
+          firstName: firstName,
+          lastName: lastName,
+          roll: roll,
+          email: email,
+          phone: phone);
+      Future success = studentData().addStudentApi(data);
+
+      success.then((value) {
+        Response response = value;
+        if (response.statusCode == 200) {
+          Fluttertoast.showToast(
+            msg: 'New student added successfully',
+            backgroundColor: Colors.green[300],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            textColor: Colors.black,
+          );
+
+          Navigator.pop(context);
+
+          Navigator.pushNamed(context, '/studentProfile', arguments: {
+            'roll': roll,
+          });
+        } else {
+          Fluttertoast.showToast(
+            msg: jsonDecode(response.body)['status'],
+            backgroundColor: Colors.red[300],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            textColor: Colors.black,
+          );
+        }
+      });
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Please fill up all fields',
+        backgroundColor: Colors.red[300],
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        textColor: Colors.black,
+      );
+    }
   }
 }
