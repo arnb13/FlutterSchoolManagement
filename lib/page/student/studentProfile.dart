@@ -1,9 +1,7 @@
-//import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:school_flutter/page/student/studentData.dart';
-import 'package:school_flutter/page/student/studentDataWithSection.dart';
 
 class StudentProfile extends StatelessWidget {
   @override
@@ -30,8 +28,8 @@ class StudentProfile extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          body: FutureBuilder<studentDataWithSection>(
-            future: studentDataWithSection().studentDataWithSectionApi(roll),
+          body: FutureBuilder<studentData>(
+            future: studentData().studentDataWithSectionApi(roll),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 firstName = snapshot.data.firstName;
