@@ -28,7 +28,7 @@ class _EditTeacherState extends State<EditTeacher> {
     TextEditingController phoneCont = TextEditingController()..text = phone;
 
     /*
-        Edit Teacher profile. NO EMAIL UPDATE. email unique
+        Edit Teacher profile. NO EMAIL UPDATE. email must be unique
      */
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.teal),

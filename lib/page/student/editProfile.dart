@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 import 'package:school_flutter/page/student/studentData.dart';
 
 class EditProfile extends StatefulWidget {
@@ -168,7 +170,8 @@ class _EditProfileState extends State<EditProfile> {
       Future success = studentData().updateStudentApi(data);
 
       success.then((value) {
-        if (value) {
+        Response response = value;
+        if (response.statusCode == 200) {
           Fluttertoast.showToast(
             msg: 'Student info updated!',
             backgroundColor: Colors.lightGreen[300],
@@ -184,7 +187,7 @@ class _EditProfileState extends State<EditProfile> {
           });
         } else {
           Fluttertoast.showToast(
-              msg: 'Student info update failed',
+              msg: jsonDecode(response.body)['status'],
               backgroundColor: Colors.red[300],
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,

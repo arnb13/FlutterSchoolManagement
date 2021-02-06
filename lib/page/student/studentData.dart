@@ -52,7 +52,7 @@ class studentData {
     Update existing student profile. can not update roll. roll unique.
   */
 
-  Future<bool> updateStudentApi(studentData data) async {
+  Future<Response> updateStudentApi(studentData data) async {
     Response response = await post(
       url_update_student,
       headers: <String, String>{
@@ -67,18 +67,14 @@ class studentData {
       }),
     );
 
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return response;
   }
 
   /*
     Add new student
   */
 
-  Future<bool> addStudentApi(studentData data) async {
+  Future<Response> addStudentApi(studentData data) async {
     Response response = await post(
       url_add_student,
       headers: <String, String>{
@@ -93,11 +89,7 @@ class studentData {
       }),
     );
 
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return response;
   }
 
   /*
