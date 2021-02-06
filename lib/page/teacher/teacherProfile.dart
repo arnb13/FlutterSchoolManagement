@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:school_flutter/page/teacher/teacherData.dart';
-import 'package:school_flutter/page/teacher/teacherDataWithSection.dart';
 
 class TeacherProfile extends StatelessWidget {
   @override
@@ -26,8 +25,8 @@ class TeacherProfile extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          body: FutureBuilder<teacherDataWithSection>(
-            future: teacherDataWithSection().getTeacherApi(email),
+          body: FutureBuilder<teacherData>(
+            future: teacherData().getTeacherApi(email),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 firstName = snapshot.data.firstName;

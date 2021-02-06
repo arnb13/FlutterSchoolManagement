@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 import 'package:school_flutter/page/teacher/teacherData.dart';
 
 class EditTeacher extends StatefulWidget {
@@ -143,10 +146,11 @@ class _EditTeacherState extends State<EditTeacher> {
       Future success = teacherData().updateTeacher(data);
 
       success.then((value) {
-        if (value) {
+        Response response = value;
+        if (response.statusCode == 200) {
           Fluttertoast.showToast(
             msg: 'Teacher info updated!',
-            backgroundColor: Colors.lightGreen[300],
+            backgroundColor: Colors.green[300],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             textColor: Colors.black,
@@ -159,7 +163,7 @@ class _EditTeacherState extends State<EditTeacher> {
           });
         } else {
           Fluttertoast.showToast(
-            msg: 'Teacher info update failed!',
+            msg: jsonDecode(response.body)['status'],
             backgroundColor: Colors.red[300],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
