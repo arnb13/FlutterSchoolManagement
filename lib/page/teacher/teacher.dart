@@ -8,10 +8,10 @@ class Teacher extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TeacherState createState() => _TeacherState();
+  TeacherState createState() => TeacherState();
 }
 
-class _TeacherState extends State<Teacher> {
+class TeacherState extends State<Teacher> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<teacherData>>(

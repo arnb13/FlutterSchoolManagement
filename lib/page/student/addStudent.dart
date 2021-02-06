@@ -114,10 +114,8 @@ class AddStudentState extends State<AddStudent> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
                     color: Colors.teal,
-                    onPressed: () {
-                      submit(firstNameCont, lastNameCont, rollCont, emailCont,
-                          phoneCont, context);
-                    }),
+                    onPressed: () => submit(firstNameCont, lastNameCont,
+                        rollCont, emailCont, phoneCont, context)),
               )
             ],
           ),
@@ -148,7 +146,6 @@ class AddStudentState extends State<AddStudent> {
         email.isNotEmpty &&
         phone.isNotEmpty) {
       studentData data = studentData(
-          id: 0,
           firstName: firstName,
           lastName: lastName,
           roll: roll,

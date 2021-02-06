@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
-import 'package:school_flutter/page/student/studentData.dart';
+import 'package:school_flutter/page/teacher/teacherData.dart';
 
 class AddTeacher extends StatefulWidget {
   @override
@@ -100,10 +100,8 @@ class AddTeacherState extends State {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
                     color: Colors.teal,
-                    onPressed: () {
-                      submit(firstNameCont, lastNameCont, emailCont, phoneCont,
-                          context);
-                    }),
+                    onPressed: () => submit(firstNameCont, lastNameCont,
+                        emailCont, phoneCont, context)),
               )
             ],
           ),
@@ -131,19 +129,15 @@ class AddTeacherState extends State {
         lastName.isNotEmpty &&
         email.isNotEmpty &&
         phone.isNotEmpty) {
-      studentData data = studentData(
-          id: 0,
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone);
-      Future success = studentData().addStudentApi(data);
+      teacherData data = teacherData(
+          firstName: firstName, lastName: lastName, email: email, phone: phone);
+      Future success = teacherData().addTeacherApi(data);
 
       success.then((value) {
         Response response = value;
         if (response.statusCode == 200) {
           Fluttertoast.showToast(
-            msg: 'New student added successfully',
+            msg: 'New Teacher added successfully',
             backgroundColor: Colors.green[300],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
