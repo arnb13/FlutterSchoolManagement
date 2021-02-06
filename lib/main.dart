@@ -7,6 +7,7 @@ import 'package:school_flutter/page/student/addStudent.dart';
 import 'package:school_flutter/page/student/editProfile.dart';
 import 'package:school_flutter/page/student/student.dart';
 import 'package:school_flutter/page/student/studentProfile.dart';
+import 'package:school_flutter/page/teacher/addTeacher.dart';
 import 'package:school_flutter/page/teacher/editTeacher.dart';
 import 'package:school_flutter/page/teacher/teacher.dart';
 import 'package:school_flutter/page/teacher/teacherProfile.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/addStudent': (context) => AddStudent(),
         '/teacherProfile': (context) => TeacherProfile(),
         '/editTeacher': (context) => EditTeacher(),
+        '/addTeacher': (context) => AddTeacher(),
       },
       title: 'School',
       theme: ThemeData(primaryColor: Colors.teal),
@@ -109,7 +111,10 @@ class _MyHomeStatefulState extends State<MyHomeStateful> {
             Icons.person_add_alt_1_outlined,
             color: Colors.black,
           ),
-          onPressed: () {});
+          onPressed: () async {
+            await Navigator.pushNamed(context, '/addTeacher');
+            _globalKey.currentState.refreshData();
+          });
     } else if (pos == 3) {
       return FloatingActionButton(
           backgroundColor: Colors.teal,
